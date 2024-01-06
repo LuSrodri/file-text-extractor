@@ -11,10 +11,7 @@ const fileTextExtractorMiddleware = (req, res, next) => {
     }
     if (req.body.data) {
         try {
-            const dataToExtract = JSON.parse(req.body.data);
-            if (!Array.isArray(dataToExtract)) {
-                throw new Error();
-            }
+            JSON.parse(req.body.data);
         } catch (e) {
             res.status(400).send('Invalid data to extract.');
             return;
