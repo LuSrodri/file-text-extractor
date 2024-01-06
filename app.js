@@ -8,8 +8,10 @@ const port = process.env.PORT || 3000;
 
 const upload = require('./upload/upload');
 
-app.post('/file-text-extractor', upload.single('file'),  async (req, res) => {
-    res.send("Pronto: " + req.file.path);
+const fileTextExtractorMiddleware = require('./util/fileTextExtractorMiddleware');
+
+app.post('/file-text-extractor', upload.single('file'), fileTextExtractorMiddleware, async (req, res) => {
+    res.send("Pronto: " + req.file.path + "\n Data to extract: " + req.body.data);
 });
 
 app.listen(port, () => {
