@@ -6,9 +6,10 @@ app.disable('x-powered-by');
 app.use(cors());
 const port = process.env.PORT || 3000;
 
+const upload = require('./upload/upload');
 
-app.get('/', async (req, res) => {
-    res.send('Hello World!');
+app.post('/file-text-extractor', upload.single('file'),  async (req, res) => {
+    res.send("Pronto: " + req.file.path);
 });
 
 app.listen(port, () => {
