@@ -5,33 +5,19 @@ const cors = require('cors');
 app.disable('x-powered-by');
 app.use(cors());
 const port = process.env.PORT || 3000;
-const fs = require('fs').promises;
 
 const upload = require('./upload/upload');
 const fileTextExtractorMiddleware = require('./util/fileTextExtractorMiddleware');
-
-const { DocumentProcessorServiceClient } = require('@google-cloud/documentai').v1;
-const client = new DocumentProcessorServiceClient();
+const extractRawText = require('./util/extractRawText');
 
 app.post('/file-text-extractor', upload.single('file'), fileTextExtractorMiddleware, async (req, res) => {
     const path = req.file.path;
-    const data = req.body.data;
     const mimetype = req.file.mimetype;
+    const data = req.body.data;
 
-    const file = await fs.readFile(path);
-    const encodedFile = file.toString('base64');
+    const text = await extractRawText(path, mimetype);
 
-    const request = {
-        name: client.processorPath(process.env.PROJECT_ID, "us", process.env.PROCESSOR_ID),
-        rawDocument: {
-            content: encodedFile,
-            mimeType: mimetype,
-        },
-    };
-
-    const [result] = await client.processDocument(request);
-    const { text } = result.document;
-    res.json({ text: text });
+    res.json({ text });
 });
 
 app.listen(port, () => {
