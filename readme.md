@@ -401,3 +401,7 @@ Content-Disposition: form-data; name="data"
 ```
 
 A **File Text Extractor** proves invaluable in various scenarios, automating the extraction of crucial details from legal contracts, invoices, and academic records. This versatile tool streamlines processes such as survey and form data analysis, facilitating decision support in business. Its applications extend to the extraction of medical information from prescriptions and laboratory reports, aiding in health record organization. Whether categorizing documents, analyzing resumes, or managing financial data from invoices and receipts, the File Text Extractor serves as an indispensable asset. Customization for specific use cases enhances its functionality, ensuring it meets unique requirements while upholding data security and privacy standards across diverse industries.
+
+## How it works
+
+We use here two technologies to provide the resources. The first one is a Google Cloud Platform technologies call Document AI, used to extract all text information given a file or image. The second one is the OpenAI api known as "Function Calling" where we passing the raw text and get it back in structured way.
