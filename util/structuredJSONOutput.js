@@ -17,7 +17,8 @@ const structuredJSONOutput = async (text, structuredForm) => {
                 function: structuredForm
             },
         ],
-        seed: 42
+        seed: 42,
+        temperature: 0.1
     });
 
     return JSON.parse(completion.choices[0].message.tool_calls[0].function.arguments);
