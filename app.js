@@ -9,18 +9,22 @@ const port = process.env.PORT || 3000;
 const upload = require('./upload/upload');
 const fileTextExtractorMiddleware = require('./util/fileTextExtractorMiddleware');
 const extractRawText = require('./util/extractRawText');
-const structedJSONOutput = require('./util/structedJSONOutput');
+const structuredJSONOutput = require('./util/structuredJSONOutput');
 
 app.post('/file-text-extractor', upload.single('file'), fileTextExtractorMiddleware, async (req, res) => {
-    const path = req.file.path;
-    const mimetype = req.file.mimetype;
-    const structuredForm = JSON.parse(req.body.data);
+    try {
+        const path = req.file.path;
+        const mimetype = req.file.mimetype;
+        const structuredForm = JSON.parse(req.body.data);
 
-    const rawText = await extractRawText(path, mimetype);
+        const rawText = await extractRawText(path, mimetype);
 
-    const structedInformation = await structedJSONOutput(rawText, structuredForm);
+        const structuredInformation = await structuredJSONOutput(rawText, structuredForm);
 
-    res.json({ structedInformation });
+        res.json({ structuredInformation, rawText });
+    } catch (error) {
+        res.status(400).json({ error: "Something went wrong..." });
+    }
 });
 
 app.listen(port, () => {

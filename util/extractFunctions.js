@@ -14,7 +14,7 @@ extract_curriculum_info = {
             },
             "summary": {
                 "type": "string",
-                "description": "Summary of the person"
+                "description": "Full summary of the person"
             },
             "email": {
                 "type": "string",
@@ -59,7 +59,7 @@ extract_curriculum_info = {
                         },
                         "description": {
                             "type": "string",
-                            "description": "Description of the education"
+                            "description": "Full description of the education"
                         }
                     }
                 }
@@ -87,7 +87,7 @@ extract_curriculum_info = {
                         },
                         "description": {
                             "type": "string",
-                            "description": "Description of the experience"
+                            "description": "Full description of the experience"
                         }
                     }
                 }
@@ -120,6 +120,72 @@ extract_curriculum_info = {
                         "level": {
                             "type": "string",
                             "description": "Level of the language"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+extract_medical_exams_info = {
+    "name": "extract_medical_exams_info",
+    "description": "Get the medical exams information from the input text",
+    "parameters": {
+        "type": "object",
+        "properties": {
+            "laboratory_name": {
+                "type": "string",
+                "description": "Name of the laboratory"
+            },
+            "name": {
+                "type": "string",
+                "description": "Name of the person"
+            },
+            "age": {
+                "type": "number",
+                "description": "Age of the person"
+            },
+            "genre": {
+                "type": "string",
+                "description": "Genre of the person"
+            },
+            "email": {
+                "type": "string",
+                "description": "Email of the person"
+            },
+            "phone": {
+                "type": "string",
+                "description": "Phone of the person"
+            },
+            "address": {
+                "type": "string",
+                "description": "Address of the person"
+            },
+            "date": {
+                "type": "string",
+                "description": "Date of the medical exams realization"
+            },
+            "medical_exams": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "name": {
+                            "type": "string",
+                            "description": "Name of the medical exam"
+                        },
+                        "description": {
+                            "type": "string",
+                            "description": "Description of the medical exam"
+                        },
+                        "Result": {
+                            "type": "number",
+                            "description": "Result of the medical exam"
+                        },
+                        "Unit of measurement": {
+                            "type": "string",
+                            "description": "Unit of measurement of the medical exam result"
                         }
                     }
                 }

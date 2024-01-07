@@ -1,14 +1,14 @@
 const { OpenAI } = require("openai");
 const openai = new OpenAI(process.env.OPENAI_API_KEY);
 
-const structedJSONOutput = async (text, structuredForm) => {
+const structuredJSONOutput = async (text, structuredForm) => {
     const completion = await openai.chat.completions.create({
         messages: [{ role: "user", content: text }],
-        model: "gpt-4",
+        model: "gpt-4-1106-preview",
         tool_choice: {
             type: "function",
             function: {
-                name: structuredForm.name,
+                name: structuredForm.name
             },
         },
         tools: [
@@ -17,9 +17,10 @@ const structedJSONOutput = async (text, structuredForm) => {
                 function: structuredForm
             },
         ],
+        seed: 42
     });
 
     return JSON.parse(completion.choices[0].message.tool_calls[0].function.arguments);
 };
 
-module.exports = structedJSONOutput;
+module.exports = structuredJSONOutput;
