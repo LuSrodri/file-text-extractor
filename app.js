@@ -27,6 +27,10 @@ app.post('/file-text-extractor', upload.single('file'), fileTextExtractorMiddlew
     }
 });
 
+app.get('/ping', (req, res) => {
+    res.send('pong');
+});
+
 app.listen(port, () => {
     console.log(`App listening at ${port}`);
 });
