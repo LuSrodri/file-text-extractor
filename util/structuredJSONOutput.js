@@ -4,7 +4,7 @@ const openai = new OpenAI(process.env.OPENAI_API_KEY);
 const structuredJSONOutput = async (text, structuredForm) => {
     const completion = await openai.chat.completions.create({
         messages: [{ role: "user", content: text }],
-        model: "gpt-4-1106-preview",
+        model: process.env.MODEL,
         tool_choice: {
             type: "function",
             function: {
