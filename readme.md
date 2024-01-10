@@ -48,6 +48,7 @@ Content-Disposition: form-data; name="data"
 }
 --boundary123--
 ```
+> **TIPS: You can see the [JSON Schema Types](https://json-schema.org/understanding-json-schema/reference/type) to helps to write the `data` attribute**
 
 #### Response example:
 
